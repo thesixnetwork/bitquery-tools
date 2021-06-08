@@ -1,0 +1,23 @@
+query ($contractAddress: String, $methodName: [String!], $caller: String) {
+  ethereum(network: bsc) {
+    smartContractCalls(
+      smartContractAddress: {is: $contractAddress}
+      smartContractMethod: {in: $methodName}
+      caller: {is: $caller}
+    ) {
+      smartContractMethod {
+        name
+      }
+      arguments {
+        argument
+        value
+      }
+      date {
+        date
+      }
+      transaction {
+        hash
+      }
+    }
+  }
+}

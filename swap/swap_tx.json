@@ -1,0 +1,11 @@
+{
+    "contractAddress" : "0x151030a9Fa62FbB202eEe50Bd4A4057AB9E826AD",
+    "methodName" : [
+      "swapTokensForExactTokens",
+      "swapExactETHForTokens",
+      "swapTokensForExactETH",
+      "swapExactTokensForETH",
+      "swapETHForExactTokens"
+    ],
+    "caller" : "{1}"
+  }
