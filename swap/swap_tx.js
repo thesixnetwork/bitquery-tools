@@ -1,5 +1,6 @@
 const o2c = require("objects-to-csv")
 var _ = require('lodash');
+const tokenMap = require('./token.json')
 
 const extract = (jsonData) => {
     return new Promise((resolve,reject)=>{
@@ -11,7 +12,7 @@ const extract = (jsonData) => {
             const callArgs = _.get(call,"arguments")
             for (let index = 0; index < callArgs.length; index++) {
                 const callArg = callArgs[index];
-                _.set(row,getRunningPropperty(row,_.get(callArg,"argument")), _.get(callArg,"value"))       
+                _.set(row,getRunningPropperty(row,_.get(callArg,"argument")), toToken(_.get(callArg,"value")))       
             }
             _.set(row,"date", _.get(call,"date.date"))
             _.set(row,"tx_hash", _.get(call,"transaction.hash"))
@@ -37,6 +38,10 @@ const getRunningPropperty  = (row,fieldName) => {
             }
         }
     }
+}
+
+const toToken = (address) => {
+    return _.get(tokenMap,address.toLowerCase(),address)
 }
 
 module.exports = {
