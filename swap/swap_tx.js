@@ -5,16 +5,16 @@ const tokenMap = require('./token.json')
 const extract = (jsonData) => {
     return new Promise((resolve,reject)=>{
         const rows = []
-        for (let index = 0; index < jsonData.data.ethereum.smartContractCalls.length; index++) {
-            const call = jsonData.data.ethereum.smartContractCalls[index];
+        for (let index = 0; index < jsonData.data.ethereum.smartContractEvents.length; index++) {
+            const call = jsonData.data.ethereum.smartContractEvents[index];
             var row = {}
-            _.set(row,"smartContractMethod", _.get(call,"smartContractMethod.name"))
+            _.set(row,"smartContractEvent", _.get(call,"smartContractEvent.name"))
             const callArgs = _.get(call,"arguments")
             for (let index = 0; index < callArgs.length; index++) {
                 const callArg = callArgs[index];
                 _.set(row,getRunningPropperty(row,_.get(callArg,"argument")), toToken(_.get(callArg,"value")))       
             }
-            _.set(row,"date", _.get(call,"date.date"))
+            _.set(row,"date", _.get(call,"block.timestamp.time"))
             _.set(row,"tx_hash", _.get(call,"transaction.hash"))
             rows.push(row)
         }

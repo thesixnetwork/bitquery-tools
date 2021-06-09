@@ -1,12 +1,12 @@
-query ($contractAddress: String, $methodName: [String!], $caller: String) {
+query ($caller: String) {
   ethereum(network: bsc) {
-    smartContractCalls(
-      smartContractAddress: {is: $contractAddress}
-      smartContractMethod: {in: $methodName}
-      caller: {is: $caller}
-    ) {
-      smartContractMethod {
+    smartContractEvents(any: {date: {after: "2021-03-31"}}, txFrom: {is: $caller}) {
+      any(of: date)
+      smartContractEvent(smartContractEvent: {in: "Swap"}) {
         name
+      }
+      transaction {
+        hash
       }
       arguments {
         argument
@@ -15,8 +15,10 @@ query ($contractAddress: String, $methodName: [String!], $caller: String) {
       date {
         date
       }
-      transaction {
-        hash
+      block {
+        timestamp {
+          time
+        }
       }
     }
   }
