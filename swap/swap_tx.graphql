@@ -20,6 +20,11 @@ query ($caller: String) {
           time
         }
       }
+      smartContract {
+        address {
+          address
+        }
+      }
     }
   }
 }

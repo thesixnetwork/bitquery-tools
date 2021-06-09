@@ -16,6 +16,7 @@ const extract = (jsonData) => {
             }
             _.set(row,"date", _.get(call,"block.timestamp.time"))
             _.set(row,"tx_hash", _.get(call,"transaction.hash"))
+            _.set(row,"smartContract", _.get(call,"smartContract.address.address"))
             rows.push(row)
         }
         const csv = new o2c(rows);
