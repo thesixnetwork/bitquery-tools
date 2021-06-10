@@ -1,0 +1,18 @@
+query MyQuery {
+  ethereum(network: bsc) {
+    transfers(
+      currency: {is: "0x0f02b1f5af54e04fb6dd6550f009ac2429c4e30d"}
+      date: {before: "2021-06-02"}
+    ) {
+      currency {
+        address
+      }
+      sender {
+        address
+      }
+      receiver {
+        address
+      }
+    }
+  }
+}
